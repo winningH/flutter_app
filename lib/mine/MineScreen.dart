@@ -10,7 +10,13 @@ class MineScreen extends StatelessWidget {
         title: new Text('我的'), 
       ),
       body: Center(
-        child: new Text('我的'), 
+        child: Text(
+          '我的',
+          style: TextStyle(
+            fontSize: 30,
+            color: Colors.blue 
+          ), 
+        ), 
       ),
     );
   }
