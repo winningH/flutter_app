@@ -1,9 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-
 class Article {
-
   final String articleId;
   final String articleTitle;
   final String articlePic;
