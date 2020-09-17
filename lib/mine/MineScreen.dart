@@ -33,6 +33,28 @@ class MineScreen extends StatelessWidget {
                 );
               }
             ),
+            RaisedButton(
+              child: Text('自定义动画'),
+              onPressed: (){
+                Navigator.push(context, 
+                  new PageRouteBuilder(
+                    pageBuilder: (context, _, __) {
+                      return SecondScreen(content: '自定义动画',);
+                    },
+                    transitionsBuilder:(_, Animation<double> animation, __, Widget child) {
+                      return new FadeTransition(
+                        opacity: animation,
+                        child: new SlideTransition(
+                          position: new Tween<Offset>(
+                            begin: Offset(0, 1),
+                            end: Offset.zero
+                          ).animate(animation),
+                          child: child),
+                      );
+                    }
+                  ));
+              }
+            )
           ]
         )
       ),
