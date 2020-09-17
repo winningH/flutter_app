@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/home.dart';
+import 'package:flutter_app/mine/SecondScreen.dart';
+import 'package:flutter_app/mine/ThirdScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,6 +18,14 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: FlowerApp(),
+      routes: {
+        '/second': (BuildContext context) {
+          return SecondScreen(content: 'second screen');
+        },
+        '/third': (BuildContext context) {
+          return ThirdScreen();
+        }
+      }
     );
   }
 }
