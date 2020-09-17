@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/find/Article.dart';
-import 'package:flutter_app/find/ArticleItem.dart';
+// import 'package:flutter_app/find/Article.dart';
+// import 'package:flutter_app/find/ArticleItem.dart';
+import 'package:flutter_app/find/Company.dart';
+import 'package:flutter_app/find/CompanyItem.dart';
 
 class FindScreen extends StatefulWidget {
   FindScreen({Key key}) : super(key: key);
@@ -10,18 +12,18 @@ class FindScreen extends StatefulWidget {
 }
 
 class _FindScreenState extends State<FindScreen> {
-  List<Article> _dataList = [];
+  List<Company> _companies = [];
 
   @override
   void initState() {
     super.initState();
-    getDataList();
+    getCompanyList();
   }
 
   // 加载数据
-  getDataList() {
+  getCompanyList() {
     setState(() {
-      _dataList = Article.resolveDataFromJsonString("""
+      _companies = Company.fromJson("""
           {
             "list": [
                {
@@ -114,7 +116,7 @@ class _FindScreenState extends State<FindScreen> {
         title: new Text('发现'),
       ),
       body: ListView.builder(
-        itemCount: _dataList.length,
+        itemCount: _companies.length,
         itemBuilder: (context, index) {
           return buildItem(context, index);
         }
@@ -124,7 +126,7 @@ class _FindScreenState extends State<FindScreen> {
 
   //build item
   buildItem(BuildContext context, int index) {
-    Article article = _dataList[index];
-    return ArticleItem(article);
+    Company company = _companies[index];
+    return CompanyItem(company);
   }
 }
