@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/find/detail/CompanyDetail.dart';
 import 'package:flutter_app/find/Company.dart';
 import 'package:flutter_app/find/CompanyItem.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -375,11 +376,23 @@ class _FindScreenState extends State<FindScreen> {
       onLoading: _onLoading,
       controller: _refreshController,
       child: ListView.builder(
-          itemCount: _companies.length,
-          itemBuilder: (context, index) {
-            Company company = _companies[index];
-            return CompanyItem(company);
-          }),
+        itemCount: _companies.length,
+        itemBuilder: (context, index) {
+          Company model = _companies[index];
+          // return CompanyItem(company);
+          return InkWell(
+            child: CompanyItem(model),
+            onTap: () {
+              Navigator.of(context).push(
+                new MaterialPageRoute(
+                  builder: (context) {
+                    // return CompanyDetailScreen(model);
+                  }
+                )
+              );
+            }
+          );
+        }),
     );
   }
 
