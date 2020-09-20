@@ -338,14 +338,19 @@ class _FindScreenState extends State<FindScreen> {
 
   int page = 1;
   getCompanyList2() async {
-    print('refresh');
     String url = 'http://m.app.haosou.com/index/getData?type=1&page=$page';
     var response = await http.get(url);
     var data = response.body;
     var map = jsonDecode(data);
-    print(map);
     setState(() {
-      _companies = [..._companies, ...Company.fromMapData(map)];
+      // _companies = [..._companies, ...Company.fromMapData(map)];
+      if (page == 1) {
+        _companies = Company.fromMapData(map);
+        _refreshController.refreshCompleted();
+      } else {
+        _companies.addAll(Company.fromMapData(map));
+        _refreshController.loadComplete();
+      }
     });
   }
 
@@ -388,19 +393,18 @@ class _FindScreenState extends State<FindScreen> {
   }
 
   _onRefresh() async {
-    Future.delayed(Duration(seconds: 2), () {
-      page = 1;
-      _companies = [];
-      getCompanyList2();
-      _refreshController.refreshCompleted();
-    });
+    // Future.delayed(Duration(seconds: 2), () {
+    //   _refreshController.refreshCompleted();
+    // });
+    page = 1;
+    getCompanyList2();
   }
 
   _onLoading() {
-    Future.delayed(Duration(seconds: 2), () {
-      page++;
-      getCompanyList2();
-      _refreshController.loadComplete();
-    });
+    page++;
+    getCompanyList2();
+    // Future.delayed(Duration(seconds: 2), () {
+    //   _refreshController.loadComplete();
+    // });
   }
 }
